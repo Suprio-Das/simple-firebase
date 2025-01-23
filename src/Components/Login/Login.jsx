@@ -1,4 +1,4 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import app from "../../firebase/firebase.init";
 import { useState } from "react";
 const Login = () => {
@@ -18,9 +18,22 @@ const Login = () => {
                 console.table("Error: ", error.message)
             })
     }
+
+    // Hanlde Google Logout
+    const handleLogOut = () => {
+        signOut(auth)
+            .then(result => {
+                alert("User Logout successfully", result)
+                setUser(null)
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
+    }
     return (
         <div>
             <button onClick={handleGoogleSignIn}>Google</button>
+            <button onClick={handleLogOut}>Logout</button>
             {user &&
                 <div>
                     <h3>User Name: {user.displayName}</h3>
