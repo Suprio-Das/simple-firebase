@@ -40,6 +40,7 @@ const Login = () => {
                 <div>
                     <h3>User Name: {user.displayName}</h3>
                     <h3>Email: {user.email}</h3>
+                    <img src={user.photoURL} alt="" />
                 </div>
             }
         </div>
