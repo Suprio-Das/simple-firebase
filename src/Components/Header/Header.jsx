@@ -1,7 +1,10 @@
+import { NavLink } from "react-router";
+
 const Header = () => {
     return (
         <div>
-            <p>This is header.</p>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/login">Login</NavLink>
         </div>
     );
 };
