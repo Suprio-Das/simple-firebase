@@ -1,6 +1,8 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import app from "../../firebase/firebase.init";
+import { useState } from "react";
 const Login = () => {
+    const [user, setUser] = useState(null)
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider;
 
@@ -8,8 +10,9 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         signInWithPopup(auth, provider)
             .then(result => {
-                const user = result.user
-                console.log(user)
+                const loggedInUser = result.user
+                console.log(loggedInUser)
+                setUser(loggedInUser)
             })
             .catch(error => {
                 console.table("Error: ", error.message)
@@ -18,6 +21,12 @@ const Login = () => {
     return (
         <div>
             <button onClick={handleGoogleSignIn}>Google</button>
+            {user &&
+                <div>
+                    <h3>User Name: {user.displayName}</h3>
+                    <h3>Email: {user.email}</h3>
+                </div>
+            }
         </div>
     );
 };
